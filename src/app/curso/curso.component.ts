@@ -28,18 +28,46 @@ export class CursoComponent implements OnInit {
       })
     
   }
-  cadastro(c:Curso){
-    this.curso_servico.cadastrarCurso(c).subscribe(
-      (res:Curso[])=>{
-        this.vetor = res;
-        
+  cadastro(){
+    this.curso_servico.cadastrarCurso(this.curso).subscribe(
+      ()=>{
         this.curso.nomeCurso='';
         this.curso.valorCurso=0;
 
         this.selecao();
         
       }
+      
+        
+       
+      
     )
   }
-
+  remover():void{
+    this.curso_servico.removerCurso(this.curso.idCurso).subscribe(
+      ()=>{
+        
+        this.curso.nomeCurso="";
+        this.curso.valorCurso=0;
+        this.selecao();
+      }
+    )
+    
+  }
+  selecionarCurso(c:Curso){
+    this.curso.idCurso = c.idCurso;
+    this.curso.nomeCurso = c.nomeCurso;
+    this.curso.valorCurso= c.valorCurso;
+  }
+  alterar(){
+    
+    this.curso_servico.alterarCurso(this.curso).subscribe(
+      ()=>{
+        console.log(this.curso);
+        this.curso.nomeCurso='';
+        this.curso.valorCurso=0;
+        this.selecao();
+      }
+    )
+  }
 }

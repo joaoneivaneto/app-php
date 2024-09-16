@@ -7,14 +7,17 @@
   <input type="number" name="valorCurso" [(ngModel)]="curso.valorCurso">
   <br>
 
-  <button (click)="cadastro()">Salvar</button>
+  <button (click)="cadastro()">cadastrar</button>
+  <button (click)="remover()">excluir</button>
+  <button (click)="alterar()">alterar</button>
 
 </form>
 
 <table border="1">
   <tr *ngFor="let v of this.vetor" >
-    <th>{{v.idCurso}}</th>
-    <th>{{v.nomeCurso}}</th>
-    <th>{{v.valorCurso}}</th>
+    <td>{{v.idCurso}}</td>
+    <td>{{v.nomeCurso}}</td>
+    <td>{{v.valorCurso}}</td>
+    <td><button (click)="this.selecionarCurso(v)">selecionar curso</button></td>
   </tr>
 </table>

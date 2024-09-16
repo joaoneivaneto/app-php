@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators'
 import { Curso } from './curso';
@@ -25,11 +25,16 @@ export class CursoService {
             })
         )
     }
-    cadastrarCurso(c:Curso):Observable<Curso[]>{
-        return this.http.post(this.url + "cadastrar",{c})
-        .pipe(map((res:any)=>{
-            this.vetor.push(res['cursos']);
-            return this.vetor;
-        }))
+    cadastrarCurso(c: Curso): Observable<Curso> {
+        return this.http.post<Curso>(this.url + 'cadastrar', c);
+    }
+
+    removerCurso(id:any):Observable<Curso> {
+       return this.http.delete<Curso>(this.url + 'excluir?idCurso='+id)
+        
+    }
+    alterarCurso(c:Curso):Observable<Curso> {
+        
+        return this.http.put<Curso>('http://localhost/api-angular-php/php/alterar.php',c)
     }
 }
